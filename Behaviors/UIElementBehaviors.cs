@@ -13,7 +13,8 @@ namespace WpfOneWayToSourceIssue001.Behaviors
         protected override void OnAttached()
         {
             base.OnAttached();
-            SetValue(ExampleBehaviorPropertyProperty, "Example Behavior Dependency Property");
+            //SetValue(ExampleBehaviorPropertyProperty, "Example Behavior Dependency Property");
+            SetCurrentValue(ExampleBehaviorPropertyProperty, "Example Behavior Dependency Property");
             var value = GetValue(ExampleBehaviorPropertyProperty);
             System.Diagnostics.Debug.WriteLine($"Set value: {(value != null ? $"\"{value}\"" : "null")}");
         }
