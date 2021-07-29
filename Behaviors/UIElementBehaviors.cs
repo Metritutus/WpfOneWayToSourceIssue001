@@ -39,12 +39,12 @@ namespace WpfOneWayToSourceIssue001.Behaviors
         
         private void DataContext_PropertyChanged(object sender, PropertyChangedEventArgs e)
         {
-            var expression = BindingOperations.GetBindingExpression(this, ExampleBehaviorPropertyProperty);
+            BindingExpression expression = BindingOperations.GetBindingExpression(this, ExampleBehaviorPropertyProperty);
+            object source = expression.ResolvedSource;
 
-            if (sender != null && (e.PropertyName == null || e.PropertyName == expression.ResolvedSourcePropertyName))
+            if (source != null && (e.PropertyName == null || e.PropertyName == expression.ResolvedSourcePropertyName))
             {
-                var currentSourceValue = sender.GetType().GetProperty(e.PropertyName).GetValue(sender);
-
+                var currentSourceValue = source.GetType().GetProperty(e.PropertyName).GetValue(source);
                 var dependencyPropertyValue = GetValue(ExampleBehaviorPropertyProperty);
 
                 if (dependencyPropertyValue != currentSourceValue)
